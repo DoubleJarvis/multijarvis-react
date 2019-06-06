@@ -20,6 +20,14 @@ class Streams extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
+  componentWillMount() {
+    if (window.location.search) {
+      const channels = window.location.search.match(/\?channels=(?<channels>.+)/).groups.channels.split(',').map((channel) => {
+        return { name: channel, player: null }
+      })
+      this.setState({ channels })
+    }
+  }
   onRemoveClick(channel) {
     this.setState(state => {
       const channels = state.channels.filter((item) => item.name !== channel);

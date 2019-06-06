@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import RemoveButton from './RemoveButton';
 
 class Stream extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class Stream extends Component {
     var player = new window.Twitch.Player(this.props.channel, options)
     player.setVolume(this.props.settings.volume)
     player.setQuality(this.props.settings.lowQuality)
+    player.setMuted(true)
 
     this.setState({ player: player })
   }
@@ -25,7 +27,7 @@ class Stream extends Component {
     const { channel } = this.props;
     return (
       <div onMouseEnter={ this.onMouseEnter } onMouseLeave={ this.onMouseLeave } className="stream" id={ channel }>
-        <button id={ channel }>Remove</button>
+        <RemoveButton id={channel} action="Remove" onRemoveClick={this.props.onRemoveClick} />
       </div>
     )
   }

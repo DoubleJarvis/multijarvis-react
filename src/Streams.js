@@ -6,12 +6,11 @@ class Streams extends Component {
     super(props)
     this.state = {
       channels: [
-        { name: "dandrumstone", player: null },
-        { name: "bobross", player: null},
-        { name: "hungry", player: null }
+        { name: "ortopilot", player: null },
+        { name: "catharsisdrums", player: null},
       ],
       settings: {
-        volume: "1",
+        volume: "0.5",
         lowQuality: "360p30",
         highQuality: "chunked"
       }

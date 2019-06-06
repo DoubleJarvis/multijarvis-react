@@ -4,30 +4,26 @@ import Stream from './Stream';
 class Streams extends Component {
   state = {
     channels: [
-      "dandrumstone", "dasmehdi", "bobross"
-    ]
+      { name: "dandrumstone", player: null },
+      { name: "bobross", player: null},
+      { name: "hungry", player: null }
+    ],
+    settings: {
+      volume: "1",
+      lowQuality: "360p30",
+      highQuality: "chunked"
+    }
   }
   render() {
     return (
       <div id="streams">
         {
           this.state.channels.map((channel) => (
-            <Stream channel={channel} onclick={this.updateChannelsState}/>
+            <Stream channel={ channel.name } settings={ this.state.settings } />
           ))
         }
       </div>
     )
-  }
-  updateChannelsState(event) {
-    // var index = this.state.channels.indexOf(event.target.id);
-    // if (index !== -1) {
-    //   var newState = this.state.channels.splice(index, 1)
-    // }
-    // this.setState({
-    //   channels: newState
-    // })
-    console.log("button")
-    console.log(event)
   }
 }
 

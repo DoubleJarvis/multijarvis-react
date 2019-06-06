@@ -33,13 +33,13 @@ class Stream extends Component {
     )
   }
   onMouseEnter(event) {
-    this.state.player.setQuality(this.props.settings.highQuality)
     this.state.player.setMuted(false)
+    this.state.player.setQuality(this.props.settings.highQuality)
   }
   onMouseLeave(event) {
+    this.state.player.setMuted(true)
     if (!this.state.player.getFullscreen()) {
       this.state.player.setQuality(this.props.settings.lowQuality)
-      this.state.player.setMuted(true)
     }
   }
 }

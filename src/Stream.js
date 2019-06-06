@@ -20,7 +20,8 @@ class Stream extends Component {
     player.setVolume(this.props.settings.volume)
     player.setQuality(this.props.settings.lowQuality)
     player.setMuted(true)
-
+    player.disableCaptions()
+    
     this.setState({ player: player })
   }
   render() {

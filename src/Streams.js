@@ -13,29 +13,50 @@ class Streams extends Component {
         volume: "0.5",
         lowQuality: "360p30",
         highQuality: "chunked"
-      }
+      },
+      value: ''
     }
     this.onRemoveClick = this.onRemoveClick.bind(this)
-  }
-  render() {
-    return (
-      <div id="streams">
-        {
-          this.state.channels.map((channel) => (
-            <Stream channel={ channel.name } settings={ this.state.settings } onRemoveClick={this.onRemoveClick} />
-          ))
-        }
-      </div>
-    )
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   onRemoveClick(channel) {
-    console.log(channel)
     this.setState(state => {
       const channels = state.channels.filter((item) => item.name !== channel);
       return {
         channels
       };
     });
+  }
+  handleChange(event) {
+    this.setState({value: event.target.value})
+  }
+  handleSubmit(event) {
+    event.preventDefault()
+    this.setState(state => {
+      const channels = state.channels.concat({ name: state.value, player: null })
+      return { channels, value: '' }
+    })
+  }
+  render() {
+    return (
+      <React.Fragment>
+        <div id="streams">
+          {
+            this.state.channels.map((channel) => (
+              <Stream channel={ channel.name } settings={ this.state.settings } onRemoveClick={this.onRemoveClick} />
+            ))
+          }
+        </div>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Name:
+            <input type="text" value={this.state.value} onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+      </React.Fragment>
+    )
   }
 }
 

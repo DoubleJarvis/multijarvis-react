@@ -7,3 +7,10 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr)
 }
+
+.stream {
+  border: 3px solid #333;
+}
+.stream:hover {
+  border: 3px solid #6441a5;
+}

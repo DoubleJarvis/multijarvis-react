@@ -19,6 +19,7 @@ class Streams extends Component {
     this.onRemoveClick = this.onRemoveClick.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.updateSearchString = this.updateSearchString.bind(this)
   }
   componentWillMount() {
     if (window.location.search) {
@@ -34,7 +35,7 @@ class Streams extends Component {
       return {
         channels
       };
-    });
+    }, this.updateSearchString);
   }
   handleChange(event) {
     this.setState({value: event.target.value})
@@ -44,7 +45,13 @@ class Streams extends Component {
     this.setState(state => {
       const channels = state.channels.concat({ name: state.value, player: null })
       return { channels, value: '' }
-    })
+    }, this.updateSearchString)
+  }
+  updateSearchString() {
+    const channels = "?channels=" + this.state.channels
+      .map((channel) => channel.name)
+      .join(',')
+    window.history.pushState({}, "MultiJarvis", channels)
   }
   render() {
     return (

@@ -5,10 +5,7 @@ class Streams extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      channels: [
-        { name: "ortopilot", player: null },
-        { name: "catharsisdrums", player: null},
-      ],
+      channels: [],
       settings: {
         volume: "0.5",
         lowQuality: "360p30",

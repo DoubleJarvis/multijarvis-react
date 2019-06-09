@@ -20,15 +20,13 @@ class Streams extends Component {
   }
   componentWillMount() {
     if (window.location.search) {
-      const channels = window.location.search.match(/\?channels=(?<channels>.+)/).groups.channels.split(',').map((channel) => {
-        return { name: channel, player: null }
-      })
+      const channels = window.location.search.match(/\?channels=(?<channels>.+)/).groups.channels.split(',').map(channel => channel)
       this.setState({ channels })
     }
   }
   onRemoveClick(channel) {
     this.setState(state => {
-      const channels = state.channels.filter((item) => item.name !== channel);
+      const channels = state.channels.filter((item) => item !== channel);
       return {
         channels
       };
@@ -40,13 +38,13 @@ class Streams extends Component {
   handleSubmit(event) {
     event.preventDefault()
     this.setState(state => {
-      const channels = state.channels.concat({ name: state.value, player: null })
+      const channels = state.channels.concat(state.value)
       return { channels, value: '' }
     }, this.updateSearchString)
   }
   updateSearchString() {
     const channels = "?channels=" + this.state.channels
-      .map((channel) => channel.name)
+      .map((channel) => channel)
       .join(',')
     window.history.pushState({}, "MultiJarvis", channels)
   }
@@ -56,7 +54,7 @@ class Streams extends Component {
         <div id="streams">
           {
             this.state.channels.map((channel) => (
-              <Stream channel={ channel.name } settings={ this.state.settings } onRemoveClick={this.onRemoveClick} />
+              <Stream key={channel} channel={ channel } settings={ this.state.settings } onRemoveClick={this.onRemoveClick} />
             ))
           }
         </div>

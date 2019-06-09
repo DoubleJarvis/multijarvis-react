@@ -13,7 +13,7 @@ class Stream extends Component {
   componentDidMount() {
     var options = {
       width: "100%",
-      height: 400,
+      height: 360,
       channel: this.props.channel,
     }
     var player = new window.Twitch.Player(this.props.channel, options)

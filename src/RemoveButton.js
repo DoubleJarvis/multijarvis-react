@@ -4,7 +4,7 @@ class RemoveButton extends Component {
   render() {
     const { id } = this.props
     return (
-      <button className="btn" id={id} onClick={() => this.onRemoveClick(id)}>
+      <button className="btn btn-remove" id={id} onClick={() => this.onRemoveClick(id)}>
         Remove
       </button>
     )

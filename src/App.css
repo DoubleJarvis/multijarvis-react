@@ -10,7 +10,19 @@ body {
 
 .stream {
   border: 3px solid #333;
+  position: relative;
 }
 .stream:hover {
   border: 3px solid #6441a5;
+}
+
+.stream > .btn-remove {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  visibility: hidden;
+}
+
+.stream:hover > .btn-remove {
+  visibility: visible;
 }

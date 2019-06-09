@@ -37,10 +37,14 @@ class Streams extends Component {
   }
   handleSubmit(event) {
     event.preventDefault()
-    this.setState(state => {
-      const channels = state.channels.concat(state.value)
-      return { channels, value: '' }
-    }, this.updateSearchString)
+    if (this.state.value) {
+      this.setState(state => {
+        const channels = state.channels.concat(state.value)
+        return { channels, value: '' }
+      }, this.updateSearchString)
+    } else {
+      alert("Cannot add empty stream")
+    }
   }
   updateSearchString() {
     const channels = "?channels=" + this.state.channels

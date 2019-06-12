@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import Streams from './Streams'
+
+import Streams from './components/Streams'
 
 function App() {
   return (

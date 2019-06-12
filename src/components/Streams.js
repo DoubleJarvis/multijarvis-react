@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Stream from './Stream';
+import AddStreamForm from './AddStreamForm'
 
 class Streams extends Component {
   constructor(props) {
@@ -10,13 +11,11 @@ class Streams extends Component {
         volume: "0.5",
         lowQuality: "360p30",
         highQuality: "chunked"
-      },
-      value: ''
+      }
     }
     this.onRemoveClick = this.onRemoveClick.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.updateSearchString = this.updateSearchString.bind(this)
+    this.onStreamAdded = this.onStreamAdded.bind(this)
   }
   componentWillMount() {
     if (window.location.search) {
@@ -32,24 +31,21 @@ class Streams extends Component {
       };
     }, this.updateSearchString);
   }
-  handleChange(event) {
-    this.setState({value: event.target.value})
+  onStreamAdded(channel) {
+    this.setState(state => {
+      const channels = state.channels.concat(channel)
+      return { channels }
+    }, this.updateSearchString)
   }
-  handleSubmit(event) {
-    event.preventDefault()
-    if (this.state.value) {
-      this.setState(state => {
-        const channels = state.channels.concat(state.value)
-        return { channels, value: '' }
-      }, this.updateSearchString)
-    } else {
-      alert("Cannot add empty stream")
-    }
-  }
+
   updateSearchString() {
-    const channels = "?channels=" + this.state.channels
-      .map((channel) => channel)
-      .join(',')
+    var channels = '';
+    if (this.state.channels.length > 0) {
+      channels = "?channels=" + this.state.channels.join(',')
+    } else {
+      channels = ""
+    }
+    console.log(channels)
     window.history.pushState({}, "MultiJarvis", channels)
   }
   render() {
@@ -62,10 +58,7 @@ class Streams extends Component {
             ))
           }
         </div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Add new stream..."/>
-          <input type="submit" value="Add" />
-        </form>
+        <AddStreamForm onStreamAdded={this.onStreamAdded} />
       </React.Fragment>
     )
   }

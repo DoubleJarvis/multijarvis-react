@@ -1,5 +1,6 @@
 {
   "name": "multijarvis-react",
+  "homepage" : "http://doublejarvis.github.io/multijarvis-react",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

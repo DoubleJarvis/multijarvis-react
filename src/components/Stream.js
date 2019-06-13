@@ -36,8 +36,8 @@ class Stream extends Component {
     this.state.player.setQuality(this.props.settings.highQuality)
   }
   onMouseLeave(event) {
-    this.state.player.setMuted(true)
     if (!this.state.player.getFullscreen()) {
+      this.state.player.setMuted(true)
       this.state.player.setQuality(this.props.settings.lowQuality)
     }
   }
